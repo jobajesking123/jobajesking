@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 3</title>
+  <style>
+    /* Body & Text */
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f6d365, #fda085);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #fff;
+      padding: 50px 20px;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    }
+
+    p, p1 {
+      font-size: 1.5em;
+      max-width: 700px;
+      margin: 0 auto 20px auto;
+      line-height: 1.8;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    img {
+      width: 70%;
+      max-width: 400px;
+      border-radius: 12px;
+      margin: 20px 0;
+    }
+
+    button {
+      margin-top: 40px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(45deg, #ff6a00, #ee0979);
+      color: white;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    }
+
+    /* Gradient animation */
+    @keyframes gradientBG {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(-20px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+
+    /* 3-Dots Menu */
+    .menu-container {
+      position: fixed;
+      top: 15px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .dots {
+      font-size: 26px;
+      cursor: pointer;
+      color: white;
+      user-select: none;
+      transition: transform 0.3s ease;
+    }
+
+    .dots.rotate {
+      transform: rotate(90deg);
+    }
+
+    .menu {
+      position: absolute;
+      right: 0;
+      margin-top: 8px;
+      background: #222;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(-10px);
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu.show {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .menu a {
+      display: block;
+      padding: 10px 15px;
+      text-decoration: none;
+      color: #fff;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+
+    .menu a:hover {
+      background: #444;
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 50px;
+      font-size: 0.9em;
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+ <!-- 3-Dots Menu -->
+<div class="menu-container">
+  <div class="dots" id="dots" onclick="toggleMenu()">⋮</div>
+  <div class="menu" id="menu">
+    <a href="first.html">Home</a>   <!-- Updated to go to first -->
+    <a href="page7.html">Message</a> <!-- Updated to go to page7 -->
+    <a href="page8.html">About</a>   <!-- About goes to page8 -->
+    <a href="page2.html">Logout</a>   <!-- Updated to go to page2 -->
+  </div>
+</div>
+
+
+
+  <h1>👋 Welcome</h1>
+
+
+
+ 
+
+  <p>Jesus died for me and you.</p>
+  <p1>“For God so loved the world…” – John 3:16</p1>
+
+  <img src="photo_2_2026-01-22_12-22-18.jpg" alt="my lord">
+
+
+  <button onclick="location.href='page2.html'">🔙 Log Out</button>
+
+  <footer class="footer">
+    © 2026 | Created by Eyoba
+  </footer>
+
+  <script>
+    const menu = document.getElementById("menu");
+    const dots = document.getElementById("dots");
+
+    function toggleMenu() {
+      menu.classList.toggle("show");
+      dots.classList.toggle("rotate");
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener("click", function(event) {
+      if (!menu.contains(event.target) && !dots.contains(event.target)) {
+        menu.classList.remove("show");
+        dots.classList.remove("rotate");
+      }
+    });
+
+
+
+
+
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
