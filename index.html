@@ -21,6 +21,44 @@
 </button>
   </a>
 
+
+
+
+ <script>
+  // Disable right click
+  document.addEventListener("contextmenu", function (e) {
+    e.preventDefault();
+    alert("Copying is disabled!");
+  });
+
+  // Disable key shortcuts
+  document.addEventListener("keydown", function (e) {
+    // Ctrl + U
+    if (e.ctrlKey && e.key.toLowerCase() === "u") {
+      e.preventDefault();
+      alert("View Source is disabled!");
+    }
+
+    // Ctrl + C
+    if (e.ctrlKey && e.key.toLowerCase() === "c") {
+      e.preventDefault();
+      alert("Copy is disabled!");
+    }
+
+    // Ctrl + Shift + I (Inspect)
+    if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") {
+      e.preventDefault();
+      alert("Inspect is disabled!");
+    }
+
+    // F12
+    if (e.key === "F12") {
+      e.preventDefault();
+      alert("Developer tools are disabled!");
+    }
+  });
+</script>
+
 </body>
 </html>
 
@@ -114,6 +152,7 @@
 
 
  
+
 
 
 
