@@ -1,0 +1,215 @@
+      <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>PDF Viewer</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    padding: 40px;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 30px;
+  }
+
+  /* ===== PDF LIST LAYOUT ===== */
+  #pdfList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1000px;
+    margin: auto;
+  }
+
+  .column {
+    background: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+
+  .column h2 {
+    margin-bottom: 15px;
+    color: #007BFF;
+  }
+
+  .pdf-link {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    cursor: pointer;
+    background: #fff;
+  }
+
+  .pdf-link:hover {
+    background: #eaeaea;
+  }
+
+  .pdf-link img {
+    width: 24px;
+    margin-right: 8px;
+  }
+
+  /* ===== PDF VIEWER ===== */
+  .pdf-container {
+    display: none;
+    margin-top: 30px;
+  }
+
+  iframe {
+    width: 80%;
+    height: 500px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+  }
+
+  .back-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+
+  .back-btn:hover {
+    background: #0056b3;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    #pdfList {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+
+
+
+
+
+
+
+<body>
+<body oncontextmenu="return false" style="user-select:none;">
+
+
+<h1>📚 Select Subject PDF</h1>
+
+<!-- ================= PDF LIST ================= -->
+<div id="pdfList">
+
+  <!-- Geography -->
+  <div class="column">
+    <h2>🌍 Geography</h2>
+    <div class="pdf-link" onclick="openPDF('geography chapter 1.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Geography Chapter 1
+    </div>
+    <div class="pdf-link" onclick="openPDF('geography_chapter_2.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Geography Chapter 2
+    </div>
+    <div class="pdf-link" onclick="openPDF('geography_chapter_3.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Geography Chapter 3
+    </div>
+    <div class="pdf-link" onclick="openPDF('geography_chapter_4.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Geography Chapter 4
+    </div>
+  </div>
+
+  <!-- Psychology -->
+  <div class="column">
+    <h2>🧠 Psychology</h2>
+    <div class="pdf-link" onclick="openPDF('psychology_chapter_1.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Psychology Chapter 1
+    </div>
+    <div class="pdf-link" onclick="openPDF('psychology_chapter_2.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Psychology Chapter 2
+    </div>
+    <div class="pdf-link" onclick="openPDF('psychology_chapter_3.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Psychology Chapter 3
+    </div>
+    <div class="pdf-link" onclick="openPDF('psychology_chapter_4.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Psychology Chapter 4
+    </div>
+    <div class="pdf-link" onclick="openPDF('psychology_chapter_5.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Psychology Chapter 5
+    </div>
+  </div>
+
+  <!-- Logic -->
+  <div class="column">
+    <h2>🧩 Logic</h2>
+    <div class="pdf-link" onclick="openPDF('LOGIC chapter 1.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Logic Chapter 1
+    </div>
+    <div class="pdf-link" onclick="openPDF('logic chapter 2.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Logic Chapter 2
+    </div>
+    <div class="pdf-link" onclick="openPDF('logic chapter 3.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Logic Chapter 3
+    </div>
+    <div class="pdf-link" onclick="openPDF('logic chapter 5.pdf')">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg">
+      Logic Chapter 5
+    </div>
+  </div>
+
+</div>
+
+<!-- ================= PDF VIEWER ================= -->
+<div class="pdf-container" id="pdfContainer">
+  <iframe id="pdfFrame"></iframe><br>
+  <button class="back-btn" onclick="goBack()">⬅ Back</button>
+</div>
+
+<script>
+function openPDF(pdf) {
+  // Hides the list and shows the PDF viewer
+  document.getElementById('pdfList').style.display = 'none';
+  document.getElementById('pdfContainer').style.display = 'flex';
+  
+  // Hide download, print, sidebar
+  document.getElementById('pdfFrame').src = pdf + "#toolbar=0&navpanes=0&scrollbar=0";
+}
+
+function goBack() {
+  // Hide PDF and show list again
+  document.getElementById('pdfContainer').style.display = 'none';
+  document.getElementById('pdfFrame').src = '';
+  document.getElementById('pdfList').style.display = 'block';
+}
+</script>
+
+
+<a class="back-btn" href="page9.html">Back</a>
+
+ 
+
+
+</script>
+
+
+</body>
+</html>
