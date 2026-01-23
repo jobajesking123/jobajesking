@@ -1,20 +1,4 @@
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -69,62 +53,71 @@
       margin-bottom: 10px;
     }
 
+    /* Rainbow color animation */
+    @keyframes rainbow {
+      0% { color: red; }
+      14% { color: orange; }
+      28% { color: yellow; }
+      42% { color: green; }
+      57% { color: blue; }
+      71% { color: indigo; }
+      85% { color: violet; }
+      100% { color: red; }
+    }
 
+    /* Floating text up and down */
+    @keyframes floatText {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
 
+    h1, h2 {
+      animation: rainbow 5s linear infinite, floatText 3s ease-in-out infinite;
+      font-weight: bold;
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-/* Rainbow color animation */
-@keyframes rainbow {
-  0% { color: red; }
-  14% { color: orange; }
-  28% { color: yellow; }
-  42% { color: green; }
-  57% { color: blue; }
-  71% { color: indigo; }
-  85% { color: violet; }
-  100% { color: red; }
-}
-
-/* Floating text up and down */
-@keyframes floatText {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-/* Apply animation to headings */
-h1, h2 {
-  animation: rainbow 5s linear infinite, floatText 3s ease-in-out infinite;
-  font-weight: bold;
-}
-
+    /* Telegram link styling */
+    .telegram-link {
+      display: block;
+      margin-top: 10px;
+      color: #0088cc;
+      font-weight: bold;
+      text-decoration: none;
+    }
+    .telegram-link:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
 
   <div class="box">
-<h1> 𝕛𝕠𝕓𝕒 𝕨𝕖𝕓 </h1>
-<h2> U HAVE ANY QUESTION AND ANY SUGGESTION U CAN TELL ME</h2>
-  
-<h3>💬 Send a Message</h3>
+    <h1>𝕛𝕠𝕓𝕒 𝕨𝕖𝕓</h1>
+    <h2>U HAVE ANY QUESTION AND ANY SUGGESTION U CAN TELL ME</h2>
+    
+    <h3>💬 Send a Message</h3>
 
     <input type="text" id="name" placeholder="Your Name">
     <textarea id="message" placeholder="Write your message..." rows="5"></textarea>
     
+    <!-- Buttons -->
     <button onclick="sendToWhatsApp()">Send via WhatsApp</button>
+    
+    <!-- Telegram button now opens bot directly -->
+    <a href="https://t.me/eyobaweb_bot" target="_blank">
+      <button>Send via Telegram</button>
+    </a>
+    
     <button id="backBtn" onclick="location.href='page9.html'">🔙 Go Back</button>
+
+    <!-- Optional Telegram link text -->
+    <a href="https://t.me/eyobaweb_bot" target="_blank" class="telegram-link">
+      
+    </a>
   </div>
 
   <script>
+    // WhatsApp Function
     function sendToWhatsApp() {
       const name = document.getElementById("name").value.trim();
       const message = document.getElementById("message").value.trim();
@@ -134,15 +127,12 @@ h1, h2 {
         return;
       }
 
-      const phone = "251955773470"; // Your phone number with Ethiopia country code
+      const phone = "251955773470"; // WhatsApp number with Ethiopia country code
       const text = `Name: ${name}\nMessage: ${message}`;
       const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-
       window.open(url, "_blank");
     }
   </script>
 
-
-
 </body>
-</html>        
+</html>
