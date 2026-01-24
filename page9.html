@@ -185,7 +185,6 @@
 </div>
 
 
-
   <h1>👋 Welcome</h1>
 
 
@@ -237,7 +236,24 @@ document.addEventListener("keydown", function (e) {
 });
 
 
+function toggleMenu() {
+  const menu = document.getElementById("menu");
+  const dots = document.getElementById("dots");
 
+  menu.classList.toggle("show");
+  dots.classList.toggle("rotate");
+}
+
+// close menu when clicking outside
+document.addEventListener("click", function (e) {
+  const menu = document.getElementById("menu");
+  const dots = document.getElementById("dots");
+
+  if (!menu.contains(e.target) && !dots.contains(e.target)) {
+    menu.classList.remove("show");
+    dots.classList.remove("rotate");
+  }
+});
 
   </script>
 
@@ -254,6 +270,7 @@ document.addEventListener("keydown", function (e) {
 </footer>
 </body>
 </html>
+
 
 
 
