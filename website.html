@@ -1,0 +1,174 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>About This Website</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #ffffff;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .box {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      animation: fadeIn 1.2s ease;
+    }
+
+    h1 {
+      margin-bottom: 15px;
+      font-size: 2.2em;
+    }
+
+    p {
+      font-size: 1.05em;
+      line-height: 1.7;
+      margin: 10px 0;
+    }
+
+    a {
+      color: #ffd966;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      background: #28a745;
+      color: white;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    .back-btn:hover {
+      background: #218838;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+    <h1>🌐 About This Website</h1>
+
+    <p>
+      This website was created for the purpose of <b>reading short and clear notes <i><span style="background:black; color:white; padding:3px 6px; border-radius:4px;">
+        Wollo University and other universities
+      </span></i></b>
+      in a simple and accessible way.
+    </p>
+
+
+ 
+
+
+
+
+
+
+
+
+    <p>
+      The goal of this website is to make learning easy, organized,
+      and available for everyone.
+    </p>
+
+    <p>
+      Created by <b>Eyob</b><br>
+      Telegram:
+      <a href="https://t.me/eyobaweb_bot" target="_blank">
+        @eyobaweb_bot
+      </a>
+    </p>
+
+    <p>🙏 Thank you for visiting this website.</p>
+
+    <a class="back-btn" href="page9.html">🔙 Back</a>
+  </div>
+
+
+
+
+<script>
+/* ====== BLOCK RIGHT CLICK ====== */
+document.addEventListener("contextmenu", function (e) {
+  e.preventDefault();
+});
+
+/* ====== BLOCK TEXT SELECTION ====== */
+document.addEventListener("selectstart", function (e) {
+  e.preventDefault();
+});
+
+/* ====== BLOCK DRAG ====== */
+document.addEventListener("dragstart", function (e) {
+  e.preventDefault();
+});
+
+/* ====== BLOCK KEYBOARD SHORTCUTS ====== */
+document.addEventListener("keydown", function (e) {
+
+  const key = e.key.toLowerCase();
+
+  // F12
+  if (e.keyCode === 123) {
+    e.preventDefault();
+  }
+
+  // Ctrl + something
+  if (e.ctrlKey) {
+    if (
+      key === "c" || // copy
+      key === "x" || // cut
+      key === "v" || // paste
+      key === "u" || // view source
+      key === "s" || // save
+      key === "p" || // print
+      key === "a" || // select all
+      key === "i" || // inspect
+      key === "j"
+    ) {
+      e.preventDefault();
+    }
+  }
+
+  // Ctrl + Shift + I / J / C
+  if (e.ctrlKey && e.shiftKey) {
+    if (key === "i" || key === "j" || key === "c") {
+      e.preventDefault();
+    }
+  }
+});
+</script>
+
+</body>
+</html>
