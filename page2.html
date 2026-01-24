@@ -142,12 +142,17 @@ function login() {
   const users = getUsers();
   const user = users.find(u => u.email === email && u.password === password);
 
-  if (!user) {
-    error.textContent = "Incorrect email or password";
-    return;
-  }
+  
+if (user) {
+  success.textContent = "✅ Login successfuly";
+  setTimeout(() => {
+    window.location.href = "page9.html";
+  }, 500);
+} else {
+  error.textContent = "❌ your email is not active in this web";
+}
 
-  success.textContent = "Login successful";
+  
 }
 
 /* ================= HELPERS ================= */
@@ -200,3 +205,4 @@ document.addEventListener("keydown", function (e) {
 
 </body>
 </html>
+
