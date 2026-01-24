@@ -158,6 +158,29 @@
     opacity: 1;
   }
 
+.menu {
+  position: absolute;
+  right: 0;
+  margin-top: 8px;
+  background: #222;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu.show {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dots.rotate {
+  transform: rotate(90deg);
+}
 
     
   
@@ -166,23 +189,23 @@
 
 </head>
 <body>
-
- <!-- 3-Dots Menu -->
 <div class="menu-container">
   <div class="dots" id="dots" onclick="toggleMenu()">⋮</div>
+
   <div class="menu" id="menu">
-  <a href="index.html">Home</a>
-  <a href="page7.html">Message</a>
+    <a href="index.html">Home</a>
+    <a href="page7.html">Message</a>
 
-  <!-- ABOUT OPTIONS -->
-  <div style="border-top:1px solid #444"></div>
-  <a href="about-me.html">👤 About Me</a>
-  <a href="about-website.html">🌐 About Website</a>
+    <div style="border-top:1px solid #444"></div>
+    <a href="about-me.html">👤 About Me</a>
+    <a href="about-website.html">🌐 About Website</a>
 
-  <div style="border-top:1px solid #444"></div>
-  <a href="page2.html">Logout</a>
-
+    <div style="border-top:1px solid #444"></div>
+    <a href="page2.html">Logout</a>
+  </div>
 </div>
+
+
 
 
   <h1>👋 Welcome</h1>
@@ -270,6 +293,7 @@ document.addEventListener("click", function (e) {
 </footer>
 </body>
 </html>
+
 
 
 
