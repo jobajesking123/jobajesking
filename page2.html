@@ -54,6 +54,50 @@
 </head>
 <body>
 
+<div class="box">
+  <span class="help-icon" onclick="openHelp()">❓</span>
+  <h2>Login</h2>
+
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+
+  <p class="error" id="error"></p>
+  <p class="success" id="success"></p>
+
+  <button onclick="login()">Login</button>
+  <button onclick="register()">Register</button>
+</div>
+
+<!-- HELP POPUP -->
+<div id="helpPopup" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+">
+  <div style="
+    background:white;
+    padding:20px;
+    width:320px;
+    border-radius:8px;
+  ">
+    <h3>Help Center</h3>
+    <ol>
+      <li>Enter your email</li>
+      <li>Enter your password</li>
+      <li>Click Register</li>
+      <li>Then Login</li>
+    </ol>
+    <p>📧 support@yoursite.com</p>
+    <button onclick="closeHelp()">Close</button>
+  </div>
+
+
+  
   <div class="box">
     <h2>Login</h2>
 
@@ -254,6 +298,7 @@ const defaultUsers = [
 
 
  
+
 
 
 
