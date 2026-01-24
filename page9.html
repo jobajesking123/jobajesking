@@ -190,19 +190,21 @@
 </head>
 <body>
 
-<div class="menu-container">
+
+
+   <div class="menu-container">
   <div class="dots" id="dots" onclick="toggleMenu()">⋮</div>
 
   <div class="menu" id="menu">
     <a href="index.html">Home</a>
     <a href="page7.html">Message</a>
 
-    <!-- ABOUT (CLICKABLE) -->
-    <div class="about-btn" onclick="toggleAbout()">
-      About ▸
+    <!-- ABOUT -->
+    <div class="about-btn" onclick="toggleAbout(event)">
+      About
     </div>
 
-    <!-- ABOUT SUBMENU (HIDDEN FIRST) -->
+    <!-- HIDDEN SUBMENU -->
     <div class="submenu" id="aboutSub">
       <a href="about-website.html">🌐 About This Website</a>
       <a href="about-me.html">👤 About Me</a>
@@ -211,6 +213,7 @@
     <a href="page2.html">Logout</a>
   </div>
 </div>
+
 
 
 
@@ -300,6 +303,7 @@ document.addEventListener("click", function (e) {
 </footer>
 </body>
 </html>
+
 
 
 
