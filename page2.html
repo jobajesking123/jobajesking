@@ -77,33 +77,6 @@
 
 
 
-  <!-- HELP POPUP -->
-<div id="helpPopup" style="
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.6);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  z-index:999;
-">
-  <div style="
-    background:white;
-    padding:20px;
-    width:320px;
-    border-radius:8px;
-  ">
-    <h3>Help Center</h3>
-    <ol>
-      <li>Enter your email</li>
-      <li>Enter your password</li>
-      <li>Click Register</li>
-      <li>Then Login</li>
-    </ol> 
-    <p>📧 support@yoursite.com</p>
-    <button onclick="closeHelp()">Close</button>
-  </div>
 
 
   
@@ -161,7 +134,16 @@
 
    
   </div>
-
+ <button onclick="closeHelp()" style="
+      width:100%;
+      padding:8px;
+      background:green;
+      color:white;
+      border:none;
+      cursor:pointer;
+    ">
+      Close
+    </button>
 
 
 
@@ -284,6 +266,7 @@ document.addEventListener("keydown", function (e) {
 
 </body>
 </html>
+
 
 
 
