@@ -228,24 +228,6 @@
 
 
 
-/* ================= PROTECTION ================= */
-
-document.addEventListener("contextmenu", e => e.preventDefault());
-
-document.addEventListener("keydown", function (e) {
-  const tag = e.target.tagName;
-  if (tag === "INPUT" || tag === "TEXTAREA") return;
-
-  const k = e.key.toLowerCase();
-
-  if (
-    e.keyCode === 123 ||
-    (e.ctrlKey && ["u","p","s","c","x","v","a","i","j"].includes(k)) ||
-    (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k))
-  ) {
-    e.preventDefault();
-  }
-});
 
   </script>
 
@@ -262,6 +244,7 @@ document.addEventListener("keydown", function (e) {
 </footer>
 </body>
 </html>
+
 
 
 
