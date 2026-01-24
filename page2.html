@@ -104,55 +104,62 @@
     <p>📧 support@yoursite.com</p>
     <button onclick="closeHelp()">Close</button>
   </div>
-<!-- HELP CENTER -->
+
+
+  
+
+  
+
+         
+
+
+<!-- HELP CENTER POPUP -->
 <div id="helpPopup" style="
   display:none;
   position:fixed;
-  inset:0;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
   background:rgba(0,0,0,0.6);
-  display:flex;
   justify-content:center;
   align-items:center;
-  z-index:999;
+  z-index:9999;
 ">
+
   <div style="
     background:white;
     padding:20px;
     width:320px;
     border-radius:8px;
     text-align:left;
-  ">           
+  ">
     <h3>Help Center</h3>
 
     <p>If you need help, contact me:</p>
 
-    <!-- EMAIL -->
     <p>
       📧 Email:<br>
       <a href="mailto:fantastix322@gmail.com">
-        fantastix322@gmail.com  </br>
+        fantastix322@gmail.com
       </a>
     </p>
 
-    <!-- WHATSAPP -->
     <p>
       💬 WhatsApp:<br>
       <a href="https://wa.me/251955773470" target="_blank">
-        send a mesage to eyob </br>
+        Send message on WhatsApp
       </a>
     </p>
 
-    <!-- TELEGRAM -->
     <p>
       📲 Telegram:<br>
       <a href="https://t.me/jobjesking" target="_blank">
-  Send message to Eyob
-</a>
-
+        Send message on Telegram
+      </a>
     </p>
 
-
-         <button onclick="closeHelp()" style="
+    <button onclick="closeHelp()" style="
       width:100%;
       padding:8px;
       background:green;
@@ -162,11 +169,8 @@
     ">
       Close
     </button>
-
-            
-     </div>
-
-
+  </div>
+</div>
 
 
 
@@ -289,6 +293,7 @@ document.addEventListener("keydown", function (e) {
 
 </body>
 </html>
+
 
 
 
