@@ -1,18 +1,9 @@
-  
- 
- 
-
-
-
-
-
-
-
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login</title>
+  <title>Secure Login</title>
+
   <style>
     body {
       font-family: Arial;
@@ -21,6 +12,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      user-select: none;
     }
 
     .box {
@@ -30,12 +22,14 @@
       border-radius: 8px;
       text-align: center;
       box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      position: relative;
     }
 
     input {
       width: 100%;
       padding: 10px;
       margin: 10px 0;
+      user-select: auto;
     }
 
     button {
@@ -50,8 +44,17 @@
 
     .error { color: red; }
     .success { color: green; }
+
+    .help-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+      font-size: 18px;
+    }
   </style>
 </head>
+
 <body>
 
 <div class="box">
@@ -95,210 +98,105 @@
     <p>📧 support@yoursite.com</p>
     <button onclick="closeHelp()">Close</button>
   </div>
-
-
-  
-  <div class="box">
-    <h2>Login</h2>
-
-    <input type="email" id="email" placeholder="Email">
-    <div style="position: relative;">
-  
-
-  <div style="position: relative;">
-  <input type="password" id="password" placeholder="Password">
-
-  
-       
-  </span>
 </div>
 
- 
+<script>
+/* ================= LOGIN SYSTEM ================= */
 
-  </span>
-</div>
+// Initialize users
+if (!localStorage.getItem("users")) {
+  localStorage.setItem("users", JSON.stringify([
+    { email: "fantastix322@gmail.com", password: "fantastix123@@@" }
+  ]));
+}
 
-    <p class="error" id="error"></p>
-    <p class="success" id="success"></p>
+function register() {
+  const email = emailInput();
+  const password = passwordInput();
 
-    <button onclick="login()">Login</button>
-    <button onclick="register()">Register</button>
-
-    <br><br>
-    <button onclick="location.href='index.html'">🔙 Go Back</button>
-  </div>
-
-  <script>           
-       
-    // CREATE USERS STORAGE (FIRST TIME)
-    if (!localStorage.getItem("users")) {
-      
-
-const defaultUsers = [
-  {
-    email: "fantastix322@gmail.com",
-    password: "fantastix123@@@"
-  },
-  {
-    email: "friend@gmail.com",
-    password: "friendpass123"
-  },
-  {
-    email: "jobajesking19@gmail.com",
-    password: "jobajesking19password"
-  },
-  {
-    email: "jobbelete123@gmail.com",
-    password: "0933191115..."
-  },
-  {
-    email: "bereketlight7@gmail.com",
-    password: "light@1996"
-  },
-  {
-    email: "yaredweretaw@gmail.com",
-    password: "yaredweretaw12"
-  },
-  {
-    email: "user4@gmail.com",
-    password: "mypassword4"
-  },
-  {
-    email: "user5@gmail.com",
-    password: "hello5678"
-  },
-  {
-    email: "user6@gmail.com",
-    password: "testpass99"
-  },
-  {
-    email: "user7@gmail.com",
-    password: "login777"
-  },
-  {
-    email: "user8@gmail.com",
-    password: "secure888"
-  },
-  {
-    email: "user9@gmail.com",
-    password: "password999"
-  },
-  {
-    email: "user10@gmail.com",
-    password: "finaluser10"
+  if (!email || !password) {
+    alert("Email and password required");
+    return;
   }
-];
 
+  let users = getUsers();
+  if (users.some(u => u.email === email)) {
+    alert("Email already exists");
+    return;
+  }
 
+  users.push({ email, password });
+  saveUsers(users);
+  alert("Registered successfully");
+}
 
+function login() {
+  const email = emailInput();
+  const password = passwordInput();
+  const error = document.getElementById("error");
+  const success = document.getElementById("success");
 
+  error.textContent = "";
+  success.textContent = "";
 
+  const users = getUsers();
+  const user = users.find(u => u.email === email && u.password === password);
 
+  if (!user) {
+    error.textContent = "Incorrect email or password";
+    return;
+  }
 
+  success.textContent = "Login successful";
+}
 
+/* ================= HELPERS ================= */
 
+function emailInput() {
+  return document.getElementById("email").value.trim().toLowerCase();
+}
 
+function passwordInput() {
+  return document.getElementById("password").value.trim();
+}
 
+function getUsers() {
+  return JSON.parse(localStorage.getItem("users")) || [];
+}
 
+function saveUsers(users) {
+  localStorage.setItem("users", JSON.stringify(users));
+}
 
+/* ================= HELP POPUP ================= */
 
+function openHelp() {
+  document.getElementById("helpPopup").style.display = "flex";
+}
 
+function closeHelp() {
+  document.getElementById("helpPopup").style.display = "none";
+}
 
+/* ================= PROTECTION ================= */
 
+document.addEventListener("contextmenu", e => e.preventDefault());
 
+document.addEventListener("keydown", function (e) {
+  const tag = e.target.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA") return;
 
+  const k = e.key.toLowerCase();
 
-
-
-
-
-      localStorage.setItem("users", JSON.stringify(defaultUsers));
-    }
-
-    function register() {
-      const email = document.getElementById("email").value.trim().toLowerCase();
-      const password = document.getElementById("password").value.trim();
-
-      if (email === "" || password === "") {
-        alert("Email and password required");
-        return;
-      }
-
-      let users = JSON.parse(localStorage.getItem("users"));
-
-      if (users.some(u => u.email === email)) {
-        alert("❌ Email already exists");
-        return;
-      }
-
-      users.push({ email, password });
-      localStorage.setItem("users", JSON.stringify(users));
-
-      alert("✅ Registered successfully. Now login.");
-    }
-
-    function login() {
-      const email = document.getElementById("email").value.trim().toLowerCase();
-      const password = document.getElementById("password").value.trim();
-      const error = document.getElementById("error");
-      const success = document.getElementById("success");
-
-      error.textContent = "";
-      success.textContent = "";
-
-      let users = JSON.parse(localStorage.getItem("users"));
-
-      const match = users.find(
-        u => u.email === email && u.password === password
-      );
-
-      if (match) {
-        success.textContent = "✅ Login successful";
-        setTimeout(() => {
-          window.location.href = "page9.html";
-        }, 800);
-      } else {
-        error.textContent = "❌ Wrong email or password";
-      }
-    }
-  </script>
+  if (
+    e.keyCode === 123 ||
+    (e.ctrlKey && ["u","p","s","c","x","v","a","i","j"].includes(k)) ||
+    (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k))
+  ) {
+    e.preventDefault();
+  }
+});
+</script>
 
 </body>
 </html>
-
-
-
- 
-
-
-
-
-
-
- 
-
-
-
-
-
-
- 
-
-
-    
-   
-
- 
-
-
-  
-
-
-
-
-
- 
-
-
-
-
