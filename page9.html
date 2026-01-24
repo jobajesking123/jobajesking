@@ -189,6 +189,7 @@
 
 </head>
 <body>
+
 <div class="menu-container">
   <div class="dots" id="dots" onclick="toggleMenu()">⋮</div>
 
@@ -196,15 +197,19 @@
     <a href="index.html">Home</a>
     <a href="page7.html">Message</a>
 
-    <div style="border-top:1px solid #444"></div>
-    <a href="about-me.html">👤 About Me</a>
-    <a href="about-website.html">🌐 About Website</a>
+    <!-- ABOUT -->
+    <div class="about-item" onclick="toggleAbout()">
+      About ▸
+    </div>
 
-    <div style="border-top:1px solid #444"></div>
+    <div class="submenu" id="aboutSub">
+      <a href="about-website.html">🌐 About This Website</a>
+      <a href="about-me.html">👤 About Me</a>
+    </div>
+
     <a href="page2.html">Logout</a>
   </div>
 </div>
-
 
 
 
@@ -293,6 +298,7 @@ document.addEventListener("click", function (e) {
 </footer>
 </body>
 </html>
+
 
 
 
