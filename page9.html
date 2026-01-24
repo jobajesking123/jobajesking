@@ -207,7 +207,9 @@
   display: block;
 }
 
-  
+
+    <div class="dots" id="dots" onclick="toggleMenu()">⋮</div>
+
 </style>
 
 
@@ -238,6 +240,7 @@
     <a href="page2.html">Logout</a>
   </div>
 </div>
+<div class="dots" id="dots" onclick="toggleMenu()">⋮</div>
 
 
 
@@ -294,13 +297,16 @@ document.addEventListener("keydown", function (e) {
 });
 
 
-function toggleMenu() {
-  const menu = document.getElementById("menu");
-  const dots = document.getElementById("dots");
 
-  menu.classList.toggle("show");
-  dots.classList.toggle("rotate");
+function toggleMenu() {
+  document.getElementById("menu").classList.toggle("show");
+  document.getElementById("dots").classList.toggle("rotate");
 }
+
+
+
+  
+
 
 // close menu when clicking outside
 document.addEventListener("click", function (e) {
@@ -356,6 +362,7 @@ document.addEventListener("click", function(e) {
 </footer>
 </body>
 </html>
+
 
 
 
