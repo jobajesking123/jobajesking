@@ -100,6 +100,57 @@
   </div>
 </div>
 
+
+  <!-- HELP CENTER -->
+<div id="helpPopup" style="
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.6);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+">
+  <div style="
+    background:white;
+    padding:20px;
+    width:320px;
+    border-radius:8px;
+    text-align:left;
+  ">
+    <h3>Help Center</h3>
+
+    <p>If you need help, contact me:</p>
+
+    <!-- EMAIL -->
+    <p>
+      📧 Email:<br>
+      <a href="mailto:yourmail@gmail.com">
+        yourmail@gmail.com
+      </a>
+    </p>
+
+    <!-- WHATSAPP -->
+    <p>
+      💬 WhatsApp:<br>
+      <a href="https://wa.me/1234567890?text=Hello%20I%20need%20help" target="_blank">
+        Chat on WhatsApp
+      </a>
+    </p>
+
+    <!-- TELEGRAM -->
+    <p>
+      📲 Telegram:<br>
+      <a href="https://t.me/yourusername" target="_blank">
+        Message me on Telegram
+      </a>
+    </p>
+
+    <button onclick="closeHelp()">Close</button>
+  </div>
+
+
 <script>
 /* ================= LOGIN SYSTEM ================= */
 
@@ -152,7 +203,7 @@ if (user) {
   error.textContent = "❌ your email is not active in this web";
 }
 
-  
+
 }
 
 /* ================= HELPERS ================= */
@@ -202,7 +253,9 @@ document.addEventListener("keydown", function (e) {
   }
 });
 </script>
+<button onclick="history.back()">🔙 Back</button>
 
 </body>
 </html>
+
 
