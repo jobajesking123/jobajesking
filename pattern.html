@@ -277,8 +277,31 @@ container.addEventListener('touchmove', e => {
 });
 
 container.addEventListener('touchend', finishPattern);
+
+
+
+
+
+
+// The correct pattern
+const correctPattern = "5-8-4-2-6-7-3-9-1";
+
+// This determines where the user goes if correct
+const correctNextPage = "page8.html";
+
+// ... rest of the JS remains same ...
+
+if(pattern.join("-") === correctPattern){
+    window.location.href = correctNextPage;
+}
+
+
+
+
+  
 </script>
 
 </body>
 </html>
+
 
