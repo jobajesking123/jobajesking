@@ -97,7 +97,64 @@
 </p>
 
 
-  
+  <script> 
+// ===== Disable Right-Click =====
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert('Right-click is disabled on this page!');
+});
+
+// ===== Disable Keyboard Shortcuts =====
+document.addEventListener('keydown', function(e) {
+  // Ctrl / Cmd + key combinations
+  if (e.ctrlKey || e.metaKey) {
+    // Prevent Ctrl+U (view source), Ctrl+S (save), Ctrl+C (copy), Ctrl+Shift+I (devtools)
+    if (
+      e.key.toLowerCase() === 'u' || 
+      e.key.toLowerCase() === 's' || 
+      (e.shiftKey && e.key.toLowerCase() === 'i') || 
+      (e.shiftKey && e.key.toLowerCase() === 'j') ||
+      e.key.toLowerCase() === 'c'
+    ) {
+      e.preventDefault();
+      alert('This shortcut is disabled!');
+    }
+  }
+
+  // Disable F12, F11, F5
+  if (e.key === 'F12' || e.key === 'F11' || e.key === 'F5') {
+    e.preventDefault();
+    alert('This key is disabled!');
+  }
+});
+
+// ===== Disable Dragging & Selection =====
+document.addEventListener('selectstart', function(e) {
+  e.preventDefault();
+});
+document.addEventListener('dragstart', function(e) {
+  e.preventDefault();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
 
 </body>
 </html>
@@ -201,4 +258,5 @@
 
 </body>
 </html>
+
 
