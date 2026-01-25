@@ -224,6 +224,77 @@ document.addEventListener('mouseup', finishPattern);
 container.addEventListener('touchstart', e=>{ if(!isLocked){ const touch=e.touches[0]; const elem=document.elementFromPoint(touch.clientX,touch.clientY); if(elem && elem.classList.contains('dot')){ resetPattern(); isDrawing=true; activate(elem);} }});
 container.addEventListener('touchmove', e=>{ if(!isLocked){ const touch=e.touches[0]; const elem=document.elementFromPoint(touch.clientX,touch.clientY); if(elem && elem.classList.contains('dot')) activate(elem); const rect=container.getBoundingClientRect(); currentPos.x=touch.clientX-rect.left; currentPos.y=touch.clientY-rect.top; drawTempLine(); }});
 container.addEventListener('touchend', finishPattern);
+
+
+
+
+
+// ===== Disable Right-Click =====
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+  alert('Right-click is disabled on this page!');
+});
+
+// ===== Disable Keyboard Shortcuts =====
+document.addEventListener('keydown', function(e) {
+  // Ctrl / Cmd + key combinations
+  if (e.ctrlKey || e.metaKey) {
+    // Prevent Ctrl+U (view source), Ctrl+S (save), Ctrl+C (copy), Ctrl+Shift+I (devtools)
+    if (
+      e.key.toLowerCase() === 'u' || 
+      e.key.toLowerCase() === 's' || 
+      (e.shiftKey && e.key.toLowerCase() === 'i') || 
+      (e.shiftKey && e.key.toLowerCase() === 'j') ||
+      e.key.toLowerCase() === 'c'
+    ) {
+      e.preventDefault();
+      alert('This shortcut is disabled!');
+    }
+  }
+
+  // Disable F12, F11, F5
+  if (e.key === 'F12' || e.key === 'F11' || e.key === 'F5') {
+    e.preventDefault();
+    alert('This key is disabled!');
+  }
+});
+
+// ===== Disable Dragging & Selection =====
+document.addEventListener('selectstart', function(e) {
+  e.preventDefault();
+});
+document.addEventListener('dragstart', function(e) {
+  e.preventDefault();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </script>
 </body>
 </html>
+
