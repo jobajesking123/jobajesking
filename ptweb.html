@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Page 4 Pattern Lock</title>
+<title>Pattern Lock Attractive</title>
 <style>
 body {
   margin: 0;
@@ -12,9 +12,9 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  font-family: Arial;
-  overflow: hidden;
+  font-family: Arial, sans-serif;
   user-select: none;
+  overflow: hidden;
   background: linear-gradient(-45deg, #00ff99, #00d4ff, #6a00ff, #ff00aa);
   background-size: 400% 400%;
   animation: gradientBG 15s ease infinite;
@@ -28,7 +28,7 @@ body {
 
 h1 {
   color: white;
-  text-shadow: 2px 2px 8px #000;
+  text-shadow: 2px 2px 10px #000;
   margin-bottom: 20px;
   font-size: 24px;
   text-align: center;
@@ -38,8 +38,6 @@ h1 {
   position: relative;
   width: 300px;
   height: 300px;
-  border-radius: 50%;
-  box-shadow: 0 0 60px 20px rgba(0,212,255,0.4);
 }
 
 .dot {
@@ -50,7 +48,7 @@ h1 {
   background: #222;
   position: absolute;
   transform: translate(-50%, -50%);
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
 }
 
 .dot.active {
@@ -78,11 +76,11 @@ canvas {
 </head>
 <body>
 
-<h1>If you know about me, draw t<span style="color:red;">h</span>e pattern</h1>
+<h1>Draw the pattern</h1>
 
 <div id="patternContainer">
   <canvas id="lineCanvas" width="300" height="300"></canvas>
-
+  
   <div class="dot" data-id="1" style="top:20%; left:20%;"></div>
   <div class="dot" data-id="2" style="top:20%; left:50%;"></div>
   <div class="dot" data-id="3" style="top:20%; left:80%;"></div>
@@ -106,51 +104,58 @@ let isDrawing = false;
 let lastPos = null;
 let currentPos = {x:0,y:0};
 
-// ✅ Correct pattern
+// Correct pattern
 const correctPattern = "5-8-4-2-6-7-3-9-1";
-// ✅ Next page for this lock
 const correctNextPage = "website.html";
 
 let wrongAttempts = 0;
 let isLocked = false;
 
+// Get center position of a dot
 function getDotCenter(dot){
   const rect = dot.getBoundingClientRect();
   const parentRect = container.getBoundingClientRect();
   return { x: rect.left + rect.width/2 - parentRect.left, y: rect.top + rect.height/2 - parentRect.top };
 }
 
+// Reset everything
 function resetPattern(){
   pattern = [];
   lastPos = null;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
-  document.querySelectorAll('.dot').forEach(d => {
-    d.style.background = "#222";
-    d.style.borderColor = "#555";
-  });
 }
 
-function drawLine(from,to){
-  ctx.strokeStyle="#00d4ff";
-  ctx.lineWidth=5;
-  ctx.lineCap="round";
+// Smooth line draw function
+function drawLine(from, to){
+  const gradient = ctx.createLinearGradient(from.x, from.y, to.x, to.y);
+  gradient.addColorStop(0,'#00ffea');
+  gradient.addColorStop(0.5,'#00d4ff');
+  gradient.addColorStop(1,'#00ffea');
+  
+  ctx.strokeStyle = gradient;
+  ctx.lineWidth = 6;
+  ctx.lineCap = "round";
+  ctx.shadowBlur = 15;
+  ctx.shadowColor = "#00d4ff";
   ctx.beginPath();
   ctx.moveTo(from.x, from.y);
   ctx.lineTo(to.x, to.y);
   ctx.stroke();
 }
 
+// Draw temporary line following pointer
 function drawTempLine(){
   if(lastPos && isDrawing){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     for(let i=0;i<pattern.length-1;i++){
       drawLine(getDotCenter(document.querySelector(`.dot[data-id='${pattern[i]}']`)), getDotCenter(document.querySelector(`.dot[data-id='${pattern[i+1]}']`)));
     }
-    drawLine(lastPos,currentPos);
+    drawLine(lastPos, currentPos);
   }
 }
 
+// Activate dot
 function activate(dot){
   if(isLocked) return;
   const id = dot.dataset.id;
@@ -163,6 +168,7 @@ function activate(dot){
   }
 }
 
+// Wrong pattern flash
 function flashWrongPattern(){
   document.querySelectorAll('.dot').forEach(d => {
     d.style.background="red";
@@ -171,15 +177,16 @@ function flashWrongPattern(){
   setTimeout(resetPattern,500);
 }
 
+// Finish pattern
 function finishPattern(){
   if(isLocked) return;
-  isDrawing=false;
+  isDrawing = false;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   for(let i=0;i<pattern.length-1;i++){
     drawLine(getDotCenter(document.querySelector(`.dot[data-id='${pattern[i]}']`)), getDotCenter(document.querySelector(`.dot[data-id='${pattern[i+1]}']`)));
   }
   document.getElementById('output').innerText = "Pattern: "+pattern.join("-");
-  if(pattern.length<4){ alert("You must connect at least 4 dots!"); resetPattern(); return; }
+  if(pattern.length<4){ alert("Connect at least 4 dots!"); resetPattern(); return; }
 
   if(pattern.join("-")===correctPattern){
     window.location.href = correctNextPage;
@@ -191,6 +198,7 @@ function finishPattern(){
   }
 }
 
+// Lockout after 3 wrong attempts
 function lockout(){
   isLocked=true;
   let remaining=180;
@@ -219,4 +227,3 @@ container.addEventListener('touchend', finishPattern);
 </script>
 </body>
 </html>
-
