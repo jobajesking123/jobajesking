@@ -3,89 +3,86 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Attractive Pattern Lock</title>
+<title>Page 4 Pattern Lock</title>
 <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-family: Arial;
-    overflow: hidden;
-    user-select: none;
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial;
+  overflow: hidden;
+  user-select: none;
+  background: linear-gradient(-45deg, #00ff99, #00d4ff, #6a00ff, #ff00aa);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
 
-    /* Animated gradient background */
-    background: linear-gradient(-45deg, #00ff99, #00d4ff, #6a00ff, #ff00aa);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-  }
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
 
-  @keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
+h1 {
+  color: white;
+  text-shadow: 2px 2px 8px #000;
+  margin-bottom: 20px;
+  font-size: 24px;
+  text-align: center;
+}
 
-  h1 {
-    color: white;
-    text-shadow: 2px 2px 8px #000;
-    margin-bottom: 20px;
-    font-size: 24px;
-    text-align: center;
-  }
+#patternContainer {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  box-shadow: 0 0 60px 20px rgba(0,212,255,0.4);
+}
 
-  #patternContainer {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    box-shadow: 0 0 60px 20px rgba(0,212,255,0.4); /* glowing aura */
-  }
+.dot {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #555;
+  border-radius: 50%;
+  background: #222;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  transition: all 0.2s ease;
+}
 
-  .dot {
-    width: 60px;
-    height: 60px;
-    border: 3px solid #555;
-    border-radius: 50%;
-    background: #222;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    transition: all 0.2s ease;
-  }
+.dot.active {
+  background: #00d4ff;
+  border-color: #00d4ff;
+  box-shadow: 0 0 15px 5px #00d4ff;
+  transform: translate(-50%, -50%) scale(1.2);
+}
 
-  .dot.active {
-    background: #00d4ff;
-    border-color: #00d4ff;
-    box-shadow: 0 0 15px 5px #00d4ff; /* glow when active */
-    transform: translate(-50%, -50%) scale(1.2);
-  }
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
 
-  canvas {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 0;
-  }
-
-  #output {
-    margin-top: 20px;
-    text-align: center;
-    color: white;
-    font-size: 18px;
-    text-shadow: 1px 1px 5px #000;
-  }
+#output {
+  margin-top: 20px;
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  text-shadow: 1px 1px 5px #000;
+}
 </style>
-</head>          
+</head>
 <body>
 
-<h1>If you know about ...,<h2><span style="color:white;">draw the pattern.</span> </h1></h2>
+<h1>If you know about me, draw t<span style="color:red;">h</span>e pattern</h1>
 
 <div id="patternContainer">
   <canvas id="lineCanvas" width="300" height="300"></canvas>
 
-  <!-- 3x3 Dots -->
   <div class="dot" data-id="1" style="top:20%; left:20%;"></div>
   <div class="dot" data-id="2" style="top:20%; left:50%;"></div>
   <div class="dot" data-id="3" style="top:20%; left:80%;"></div>
@@ -109,189 +106,116 @@ let isDrawing = false;
 let lastPos = null;
 let currentPos = {x:0,y:0};
 
+// ✅ Correct pattern
 const correctPattern = "5-8-4-2-6-7-3-9-1";
+// ✅ Next page for this lock
+const correctNextPage = "page8.html";
 
-// Lockout variables
 let wrongAttempts = 0;
 let isLocked = false;
 
-// Get dot center
-function getDotCenter(dot) {
+function getDotCenter(dot){
   const rect = dot.getBoundingClientRect();
   const parentRect = container.getBoundingClientRect();
-  return {
-    x: rect.left + rect.width/2 - parentRect.left,
-    y: rect.top + rect.height/2 - parentRect.top
-  };
+  return { x: rect.left + rect.width/2 - parentRect.left, y: rect.top + rect.height/2 - parentRect.top };
 }
 
-// Reset pattern
-function resetPattern() {
+function resetPattern(){
   pattern = [];
   lastPos = null;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   document.querySelectorAll('.dot').forEach(d => d.classList.remove('active'));
+  document.querySelectorAll('.dot').forEach(d => {
+    d.style.background = "#222";
+    d.style.borderColor = "#555";
+  });
 }
 
-// Draw line
-function drawLine(from, to) {
-  ctx.strokeStyle = "#00d4ff";
-  ctx.lineWidth = 5;
-  ctx.lineCap = "round";
+function drawLine(from,to){
+  ctx.strokeStyle="#00d4ff";
+  ctx.lineWidth=5;
+  ctx.lineCap="round";
   ctx.beginPath();
   ctx.moveTo(from.x, from.y);
   ctx.lineTo(to.x, to.y);
   ctx.stroke();
 }
 
-// Draw temp line while dragging
-function drawTempLine() {
+function drawTempLine(){
   if(lastPos && isDrawing){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     for(let i=0;i<pattern.length-1;i++){
-      const from = getDotCenter(document.querySelector(`.dot[data-id='${pattern[i]}']`));
-      const to = getDotCenter(document.querySelector(`.dot[data-id='${pattern[i+1]}']`));
-      drawLine(from,to);
+      drawLine(getDotCenter(document.querySelector(`.dot[data-id='${pattern[i]}']`)), getDotCenter(document.querySelector(`.dot[data-id='${pattern[i+1]}']`)));
     }
-    drawLine(lastPos, currentPos);
+    drawLine(lastPos,currentPos);
   }
 }
 
-// Activate a dot
 function activate(dot){
   if(isLocked) return;
   const id = dot.dataset.id;
   if(!pattern.includes(id)){
     dot.classList.add('active');
     const pos = getDotCenter(dot);
-    if(lastPos){
-      drawLine(lastPos,pos);
-    }
+    if(lastPos) drawLine(lastPos,pos);
     lastPos = pos;
     pattern.push(id);
   }
 }
 
-// Handle pattern completion
+function flashWrongPattern(){
+  document.querySelectorAll('.dot').forEach(d => {
+    d.style.background="red";
+    d.style.borderColor="red";
+  });
+  setTimeout(resetPattern,500);
+}
+
 function finishPattern(){
   if(isLocked) return;
-  isDrawing = false;
+  isDrawing=false;
   ctx.clearRect(0,0,canvas.width,canvas.height);
   for(let i=0;i<pattern.length-1;i++){
-    const from = getDotCenter(document.querySelector(`.dot[data-id='${pattern[i]}']`));
-    const to = getDotCenter(document.querySelector(`.dot[data-id='${pattern[i+1]}']`));
-    drawLine(from,to);
+    drawLine(getDotCenter(document.querySelector(`.dot[data-id='${pattern[i]}']`)), getDotCenter(document.querySelector(`.dot[data-id='${pattern[i+1]}']`)));
   }
+  document.getElementById('output').innerText = "Pattern: "+pattern.join("-");
+  if(pattern.length<4){ alert("You must connect at least 4 dots!"); resetPattern(); return; }
 
-  document.getElementById('output').innerText = "Pattern: " + pattern.join("-");
-
-  // Minimum 4 dots
-  if(pattern.length < 4){
-    alert("You must connect at least 4 dots!");
-    resetPattern();
-    return;
-  }
-
-  if(pattern.join("-") === correctPattern){
-    window.location.href = "page8.html";
+  if(pattern.join("-")===correctPattern){
+    window.location.href = correctNextPage;
   } else {
     wrongAttempts++;
-    if(wrongAttempts >=3){
-      lockout();
-    } else {
-      alert(`Wrong pattern ❌. Attempts left: ${3-wrongAttempts}`);
-      resetPattern();
-    }
+    flashWrongPattern();
+    if(wrongAttempts>=3){ lockout(); }
+    else { alert(`Wrong pattern ❌. Attempts left: ${3-wrongAttempts}`); }
   }
 }
 
-// Lockout for 3 minutes
 function lockout(){
-  isLocked = true;
-  let remaining = 180;
-  document.getElementById('output').innerText = `Too many wrong attempts! Try again in 3:00`;
+  isLocked=true;
+  let remaining=180;
+  document.getElementById('output').innerText=`Too many wrong attempts! Try again in 3:00`;
   resetPattern();
-
-  const timer = setInterval(()=>{
+  const timer=setInterval(()=>{
     remaining--;
-    const min = Math.floor(remaining/60).toString().padStart(1,'0');
-    const sec = (remaining%60).toString().padStart(2,'0');
-    document.getElementById('output').innerText = `Locked! Try again in ${min}:${sec}`;
-    if(remaining<=0){
-      clearInterval(timer);
-      isLocked = false;
-      wrongAttempts = 0;
-      document.getElementById('output').innerText = "Draw pattern";
-    }
+    const min=Math.floor(remaining/60).toString().padStart(1,'0');
+    const sec=(remaining%60).toString().padStart(2,'0');
+    document.getElementById('output').innerText=`Locked! Try again in ${min}:${sec}`;
+    if(remaining<=0){ clearInterval(timer); isLocked=false; wrongAttempts=0; document.getElementById('output').innerText="Draw pattern"; }
   },1000);
 }
 
-// Mouse events
-document.querySelectorAll('.dot').forEach(dot => {
-  dot.addEventListener('mousedown', e => {
-    if(isLocked) return;
-    resetPattern();
-    isDrawing = true;
-    activate(dot);
-  });
-
-  dot.addEventListener('mouseenter', e => {
-    if(isDrawing) activate(dot);
-  });
+// Mouse & Touch events
+document.querySelectorAll('.dot').forEach(dot=>{
+  dot.addEventListener('mousedown', e=>{ if(!isLocked){ resetPattern(); isDrawing=true; activate(dot);} });
+  dot.addEventListener('mouseenter', e=>{ if(isDrawing) activate(dot);} );
 });
-
-document.addEventListener('mousemove', e => {
-  if(isDrawing){
-    const rect = container.getBoundingClientRect();
-    currentPos.x = e.clientX - rect.left;
-    currentPos.y = e.clientY - rect.top;
-    drawTempLine();
-  }
-});
-
+document.addEventListener('mousemove', e=>{ if(isDrawing){ const rect=container.getBoundingClientRect(); currentPos.x=e.clientX-rect.left; currentPos.y=e.clientY-rect.top; drawTempLine(); }});
 document.addEventListener('mouseup', finishPattern);
 
-// Touch events
-container.addEventListener('touchstart', e => {
-  if(isLocked) return;
-  const touch = e.touches[0];
-  const elem = document.elementFromPoint(touch.clientX, touch.clientY);
-  if(elem && elem.classList.contains('dot')){
-    resetPattern();
-    isDrawing = true;
-    activate(elem);
-  }
-});
-
-container.addEventListener('touchmove', e => {
-  if(isLocked) return;
-  const touch = e.touches[0];
-  const elem = document.elementFromPoint(touch.clientX, touch.clientY);
-  if(elem && elem.classList.contains('dot')){
-    activate(elem);
-  }
-  const rect = container.getBoundingClientRect();
-  currentPos.x = touch.clientX - rect.left;
-  currentPos.y = touch.clientY - rect.top;
-  drawTempLine();
-});
-
+container.addEventListener('touchstart', e=>{ if(!isLocked){ const touch=e.touches[0]; const elem=document.elementFromPoint(touch.clientX,touch.clientY); if(elem && elem.classList.contains('dot')){ resetPattern(); isDrawing=true; activate(elem);} }});
+container.addEventListener('touchmove', e=>{ if(!isLocked){ const touch=e.touches[0]; const elem=document.elementFromPoint(touch.clientX,touch.clientY); if(elem && elem.classList.contains('dot')) activate(elem); const rect=container.getBoundingClientRect(); currentPos.x=touch.clientX-rect.left; currentPos.y=touch.clientY-rect.top; drawTempLine(); }});
 container.addEventListener('touchend', finishPattern);
-
-
-
-
-
-
-
-
-
-
-  
 </script>
-
 </body>
 </html>
-
-
-
