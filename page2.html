@@ -306,10 +306,27 @@ document.addEventListener("keydown", function (e) {
     e.preventDefault();
   }
 });
+
+
+  
+// This runs when the page loads
+window.onload = function() {
+    // Push a new history state so the back button doesn't leave
+    history.pushState(null, null, location.href);
+
+    // Listen for back/forward navigation
+    window.onpopstate = function(event) {
+        // Redirect to page3
+        window.location.href = "page3.html";
+    };
+};
+
+
 </script>
 
 </body>
 </html>
+
 
 
 
