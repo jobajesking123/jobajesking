@@ -6,10 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page 1</title>         <title> eyob </title>
-    <link rel="icon" type="image/x-icon" href="image/logo-wu.png">
-	. 
-<link rel="stylesheet" type="text/css" href="iiiiiiiiiiiiii">
+  <title>Page 1</title>         
  <head>
     
   </head>
@@ -23,7 +20,7 @@
 
 
   <!-- Link to Page 2 -->
-  <a href="page2.html">
+  <a href="#">
     <button>𝓒𝓛𝓘𝓒𝓚 𝓜𝓔
 </button>
   </a>
@@ -159,6 +156,7 @@
 
 
  
+
 
 
 
